@@ -5,7 +5,7 @@ object FilesExercise extends App {
     def readFromFile(): Iterator[String] = {
       val file = Source.fromFile(fileName)
       val iterator: Iterator[String] = file.getLines
-      iterator.
+      iterator
     }
     def reverseLines(lines: Iterator[String]): Unit = {
       val reverseLines: Iterator[String] = lines.toArray.reverseIterator
@@ -29,4 +29,5 @@ object WriteFileExample extends App {
   }
   val write = new WriteToFile("src/poem.txt")
   write.writeLine()
+  
 }
