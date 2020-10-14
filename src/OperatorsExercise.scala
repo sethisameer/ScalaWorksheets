@@ -51,11 +51,10 @@ object OperatorsExercise extends App {
 
   // Extract from file path
   object DestructurePath {
-    def unapply(path: String): Option[Array[String]] = {
+    def unapply(path: String): Option[String] = {
       val arr = path.split("/")
-      if (arr.isEmpty || arr.tail.isEmpty) Some(arr) else Some(arr.tail)
+      if (arr.isEmpty || arr.tail.isEmpty) Some(toKeyValuePair(arr)) else Some(toKeyValuePair(arr.tail))
     }
-
     // Alternate approach
     //    def unapply(path: String): Option[Array[String]] = if(path.indexOf("/") == -1) Some(Some(Array(path))).flatten else Some(path.tail.split("/"))
   }
@@ -78,7 +77,7 @@ object OperatorsExercise extends App {
     else if (path == "/") s"{level: Root}"
     else
       path match {
-        case DestructurePath(path) => toKeyValuePair(path)
+        case DestructurePath(path) => s"$path"
         case _ => throw new UnknownError()
       }
 
@@ -104,5 +103,67 @@ object OperatorsExercise extends App {
   println(positive(1))
   println(positive(0))
 
-  
+  object Titlecase {
+    def unapply(arg: String): Option[Array[String]] = {
+      val arr = arg.split(" ")
+      if (arr.isEmpty || arr.tail.isEmpty) Some(arr) else Some(arr.tail)
+    }
+  }
+
+  def tranformTitleCase(str: Array[String]) = {
+    var list: List[String] = Nil
+    str.foreach(s => list = list :+ s.head.toUpper + s.tail)
+    list.mkString(" ")
+  }
+
+  val toTitleCase = (str: String) => {
+    if (str == null || str.isEmpty) throw new UnknownError()
+    else
+      str match {
+        case Titlecase(str) => tranformTitleCase(str)
+        case _ => throw new UnknownError()
+      }
+  }
+
+  object TitleCase1 {
+    def unapply(arg: String): Option[String] = arg match {
+      case arg => tranformTitleCase1(arg.split(" "))
+      case _ => None
+    }
+  }
+
+  def tranformTitleCase1(str: Array[String]): Some[String] = {
+    var list: List[String] = Nil
+    str.foreach(s => list = list :+ s.head.toUpper + s.tail)
+    Some(list.mkString(" "))
+  }
+
+  val toTitleCase1 = (str: String) => {
+    if (str == null || str.isEmpty) throw new UnknownError()
+    else
+      str match {
+        case TitleCase1(str) => s"$str"
+        case _ => throw new UnknownError()
+      }
+  }
+
+  object Titlecase2 {
+    def unapply(str: String) =
+      Some(str.split(" ").toList.map {
+        case "" => ""
+        case word => word.substring(0, 1).toUpperCase + word.substring(1)
+      }.mkString(" "))
+  }
+
+  val toTitleCase2 = (str: String) => {
+    if (str == null || str.isEmpty) throw new UnknownError()
+    else
+      str match {
+        case Titlecase2(str) => s"$str"
+        case _ => throw new UnknownError()
+      }
+  }
+  println(toTitleCase("open new query console and 2 more shortcuts..."))
+  println(toTitleCase1("operator exercise does not take parameters"))
+  println(toTitleCase2("optional section covers some more details of the collections"))
 }
