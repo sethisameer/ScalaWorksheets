@@ -1,3 +1,4 @@
+// Ref Operators, Patterns Essential Scala Chapter 9-10
 object OperatorsExercise extends App {
 
   object ExtractFullName {
@@ -55,8 +56,6 @@ object OperatorsExercise extends App {
       val arr = path.split("/")
       if (arr.isEmpty || arr.tail.isEmpty) Some(toKeyValuePair(arr)) else Some(toKeyValuePair(arr.tail))
     }
-    // Alternate approach
-    //    def unapply(path: String): Option[Array[String]] = if(path.indexOf("/") == -1) Some(Some(Array(path))).flatten else Some(path.tail.split("/"))
   }
 
   // output should be: (level0:Library, level1:Java, level(n):value(n))
