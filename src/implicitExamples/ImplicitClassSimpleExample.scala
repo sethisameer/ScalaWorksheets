@@ -1,6 +1,5 @@
 package implicitExamples
 
-import scala.collection.mutable.ArrayBuffer
 /*
   * Implicit class to globally add custom string getter
   * usage: <string>.upperCaseWords => returns list of upper case words in string
@@ -8,7 +7,7 @@ import scala.collection.mutable.ArrayBuffer
 object ImplicitClassSimpleExample {
   implicit class StringEnhancement(str:String){
     def upperCaseWords: Option[String] = {
-      val list: ArrayBuffer[String] = ArrayBuffer()
+      val list: scala.collection.mutable.ArrayBuffer[String] = scala.collection.mutable.ArrayBuffer()
       val strList: Array[String] = str.split(" ")
       strList.foreach(word => if(word.head.isUpper) list += word)
       if(list.isEmpty) None else Some(list.toList.mkString(","))
@@ -29,6 +28,7 @@ object testUsage extends App{
   println(findUpperCaseWords(sampleString))
   println(findUpperCaseWords(sampleString1))
 
+  // Altnerate simple usage
   println(sampleString.upperCaseWords)
   println(sampleString1.upperCaseWords)
 }
