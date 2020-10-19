@@ -7,10 +7,14 @@ package implicitExamples
 object usageExample extends App {
   import ImplicitGeometryExample.GeometryType
   val geometries: List[String] = List("point", "polygon", "multipoint", "polyline", "foo")
-  for (geometry <- geometries) yield println(geometry.toEsriGeometry)
+  // comprehension
+  //for (geometry <- geometries) yield println(geometry.toEsriGeometry)
+  geometries.foreach(geo => println(geo.toEsriGeometry))
 
   val esriGeometries: List[String] = List("esrigeometrypoint", "esrigeometrypolygon", "esrigeometrymultipoint", "esrigeometrypolyline")
-  for (esriGeometry <- esriGeometries) yield println(esriGeometry.toStandardGeometry)
+  esriGeometries.foreach(geo => println(geo.toStandardGeometry))
+  // comprehension
+//  for (esriGeometry <- esriGeometries) yield println(esriGeometry.toStandardGeometry)
 }
 
 object ImplicitGeometryExample {

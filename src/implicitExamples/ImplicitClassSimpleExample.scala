@@ -6,29 +6,32 @@ package implicitExamples
  */
 object ImplicitClassSimpleExample {
   implicit class StringEnhancement(str:String){
-    def upperCaseWords: Option[String] = {
-      val list: scala.collection.mutable.ArrayBuffer[String] = scala.collection.mutable.ArrayBuffer()
-      val strList: Array[String] = str.split(" ")
-      strList.foreach(word => if(word.head.isUpper) list += word)
-      if(list.isEmpty) None else Some(list.toList.mkString(","))
+    def upperCaseWords: Option[Array[String]] = {
+      if(str == null || str.isEmpty){
+        None
+      } else {
+        val strList: Array[String] = str.split(" ")
+          val filter = strList.filter(_.head.isUpper)
+          if(filter.nonEmpty) Option(filter) else None
+      }
     }
   }
 }
+
 object testUsage extends App{
   import ImplicitClassSimpleExample.StringEnhancement
-  def findUpperCaseWords(str: String): String = {
-    str.upperCaseWords match {
-      case Some(word) => word
-      case None => s"No upper case found"
-    }
+  def findUpperCaseWords(str: String): String = str.upperCaseWords match {
+    case Some(words) => words.mkString(" ")
+    case None => s"No upper case found"
   }
   val sampleString = "With Markdown, you get a live preview of your formatted text inside your compose box as you type, and you can always undo your formatting by pressing Ctrl+Z."
   val sampleString1 = "you get a live preview of your formatted text inside your compose box as you type."
 
   println(findUpperCaseWords(sampleString))
   println(findUpperCaseWords(sampleString1))
+  println(findUpperCaseWords(""))
 
-  // Altnerate simple usage
-  println(sampleString.upperCaseWords)
-  println(sampleString1.upperCaseWords)
+  // Alternate simple usage
+//  println(sampleString.upperCaseWords)
+//  println(sampleString1.upperCaseWords)
 }

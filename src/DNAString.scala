@@ -9,7 +9,7 @@ object DNAString extends App {
       case strSequence if(strSequence.isEmpty) => "No Sequence found"
       case strSequence if(strSequence.length > 1000) => "Invalid sequence range"
       case strSequence =>  val group = strSequence.groupBy(char => char).toSeq.sortBy(_._1)
-        val arr: Seq[Int] = group.map(ch => ch._2.size)
+        val arr: Seq[Int] = group.map(ch => ch._2.length)
         arr.mkString("  ")
       case _ => s"Unknow error"
     }
