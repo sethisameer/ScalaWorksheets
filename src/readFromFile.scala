@@ -1,5 +1,4 @@
-import io.Source._
-
+import scala.io.Source._
 object readFromFile extends App {
   val gamesListFile = "src/GameConsoles.txt"
   for(line <- fromFile(gamesListFile).getLines()) {

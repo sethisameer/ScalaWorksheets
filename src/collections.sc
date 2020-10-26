@@ -68,4 +68,13 @@ object collections{
   val parTest = for(i <- (0 until 100).par) yield i + " "
   parTest
 
+  // varargs
+  def sum(args: Int*) = args.reduceLeft(_+_)
+  def makeMap(a: Int*) = a.map( a => (a, a))
+
+  println(sum(2, 4, 6))
+  println(makeMap(2, 4, 8))
+  println(Array(3, 5).foldLeft(100)(_ + _))
+
+
 }
