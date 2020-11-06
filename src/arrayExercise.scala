@@ -29,4 +29,18 @@ object arrayExercise extends App {
   println("Min of array is: "+ min(arr))
   println("Max of array is: "+ max(arr))
 
+
+  def vowelsWithHashCodes() = {
+    val items = Vector("a", "e", "i", "o", "u")
+    val itemsWithHash = items.map(item => (item, item.hashCode()))
+    itemsWithHash
+  }
+  def hashOfChar(input: String) = {
+    val vowels = vowelsWithHashCodes.filter(c => c._1 == input)
+    if(vowels.nonEmpty)
+      vowels.head._2
+    else
+      s"Invalid input ${input} is not a vowel"
+  }
+  hashOfChar("a")
 }

@@ -18,4 +18,5 @@ object collections1 {
   }
   f(Seq(1, 3))
   seqOperation(Seq(1, 3))
+
 }

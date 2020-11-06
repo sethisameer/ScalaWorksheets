@@ -1,4 +1,4 @@
-object collections{
+object collections {
   val v = Vector(3, 4, 5);
   v.head
   v.tail
@@ -76,5 +76,11 @@ object collections{
   println(makeMap(2, 4, 8))
   println(Array(3, 5).foldLeft(100)(_ + _))
 
+  case class Game(name: String, price: Double)
 
+  val gameOrder: List[Game] = List(Game("Super Smash Bros", 59.99), Game( "Legend Of Zelda", 49.99), Game("Ghost of Tushima", 44.00))
+  val orderTotalFoldLeft = gameOrder.foldLeft(0.0)((initalPrice, game) => initalPrice + game.price)
+  val orderTotalFoldRight = gameOrder.foldRight(0.0)((game, initalPrice) => initalPrice + game.price)
+  val orderTotalFold = gameOrder.map(order => order.price).fold(0.0){(accumulator, currentElementBeingIterated) => accumulator + currentElementBeingIterated}
+  val aggregate = gameOrder.aggregate(0.0)((initalPrice, game) => initalPrice + game.price, (accumulator, currentElementBeingIterated) => accumulator + currentElementBeingIterated)
 }
